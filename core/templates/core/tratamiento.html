@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="tratamiento-container">
+
+    <div class="tratamiento-header">
+        <h2>Seguimiento Fisioterapéutico</h2>
+        <p>Paciente: <strong>{{ paciente.nombres }} {{ paciente.apellidos }}</strong></p>
+    </div>
+
+    <form method="post" class="form-tratamiento form-premium">
+        {% csrf_token %}
+
+        <div class="card">
+            <h3>Datos de la Sesión</h3>
+            <div class="fila premium-grid">
+                <div class="campo">
+                    <label>N° de Sesión</label>
+                    {{ form.numero_sesion }}
+                </div>
+                <div class="campo">
+                    <label>EVA Inicial</label>
+                    {{ form.eva_inicial }}
+                </div>
+                <div class="campo">
+                    <label>EVA Final</label>
+                    {{ form.eva_final }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>FASES DE RECUPERACION</h3>
+            <div class="campo">
+                <label>FASE 1</label>   <!--ESTO EN OTRO LADO ESTA COMO observacion-->
+                {{ form.observaciones }}
+            </div>
+            <div class="campo">
+                <label>FASE 2</label>    <!--ESTO EN OTRO LADO ESTA COMO recomendaciones-->
+                {{ form.recomendaciones }}
+            </div>
+            <div class="campo">
+                <label>FASE 3</label>    
+                {{ form.fase3 }}
+            </div>
+              <div class="campo">
+                <label>FASE 4</label>    
+                {{ form.fase4 }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Agentes Electroterapéuticos</h3>
+            <div class="checkbox-grid premium-checks">
+                <label class="check-item">{{ form.chc }} <span>CHC</span></label>
+                <label class="check-item">{{ form.chf }} <span>CHF</span></label>
+                <label class="check-item">{{ form.us }} <span>US</span></label>
+                <label class="check-item">{{ form.infrarrojo }} <span>Infrarrojo</span></label>
+                <label class="check-item">{{ form.magneto }} <span>Magneto</span></label>
+                <label class="check-item">{{ form.electrodos }} <span>Electrodos</span></label>
+                <label class="check-item">{{ form.laser }} <span>Láser</span></label>
+                <label class="check-item">{{ form.onda_choque }} <span>Onda de choque</span></label>
+                <label class="check-item">{{ form.puncion_seca }} <span>Punción seca</span></label>
+                <label class="check-item">{{ form.terapia_manual }} <span>Terapia manual</span></label>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Validación Profesional</h3>
+            <div class="campo">
+                <label>Profesional a cargo</label>  <!--ESTO EN OTRO LADO ESTA COMO firma de terapeuta-->
+                {{ form.firma_tm }}
+            </div>
+        </div>
+
+       <div class="tratamiento-actions">
+          <a href="javascript:history.back()" class="btn-atras btn-premium">⬅️ Atrás</a>
+    <button type="submit" class="btn-guardar btn-premium">💾 Guardar</button>
+  
+
+    {% if form.instance.id %}
+        <a href="{% url 'tratamiento_pdf' form.instance.id %}" 
+           class="btn-imprimir btn-premium" target="_blank">
+           🖨️ IMPRIMIR
+        </a>
+    {% endif %}
+</div>
+
+    </form>
+</div>
+{% endblock %}

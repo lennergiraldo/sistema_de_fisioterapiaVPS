@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 12px; }
+        h1 { text-align: center; }
+        .section { margin-bottom: 10px; }
+        .label { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Historia Clínica</h1>
+
+    <div class="section">
+        <span class="label">Paciente:</span> {{ historia.paciente.nombres }} {{ historia.paciente.apellidos }}<br>
+        <span class="label">Cédula:</span> {{ historia.paciente.cedula }}<br>
+        <span class="label">Teléfono:</span> {{ historia.paciente.telefono }}<br>
+        <span class="label">Dirección:</span> {{ historia.paciente.direccion }}
+    </div>
+
+    <div class="section">
+        <span class="label">Sexo:</span> {{ historia.sexo }}<br>
+        <span class="label"> Tipo de terapia:</span> {{ historia.tipo_terapia }}<br>
+        <span class="label">Diabetes:</span> {{ historia.diabetes }}<br>
+        <span class="label">tipo de servicio:</span> {{ historia.tipo_servicio }}<br>
+        <span class="label">PACIENTE EN CAMA:</span> {{ historia.paciente_cama }}<br>
+        <span class="label">PACIENTE EN SILLA:</span> {{ historia.paciente_silla }}<br>
+        <span class="label">:</span>BIPEDESTACIÓN {{ historia.bipedestacion}}<br>
+        <span class="label">:</span>CONTROL DE ESFINTERES {{ historia.control}}<br>
+        <span class="label">:</span>TROFISMO {{ historia.trofismo}}<br>
+        <span class="label">:</span>MARCHA {{ historia.marcha}}<br>
+        <span class="label">:</span>SENSIBILIDAD {{ historia.sensibilidad}}<br>
+        <span class="label">:</span>TONO MUSCULAR {{ historia.tono_muscular}}<br>
+        <span class="label">:</span>A.M.A {{ historia.ama}}<br>
+        <span class="label">:</span>FUERZA MUSCULAR {{ historia.fuerza_muscular}}<br>
+        <span class="label">:</span>REFLEJO {{ historia.reflejo}}<br>
+        <span class="label">:</span>EF {{ historia.ef}}<br>
+        <span class="label">:</span>PLEJIA {{ historia.plejia}}<br>
+        <span class="label">:</span>PARESIA {{ historia.paresia}}<br>
+
+       <p><strong>Síntomas:</strong> {{ historia.sintomas }}</p>
+       <p><strong>Signos:</strong> {{ historia.signos }}</p>
+       <p><strong>Presión arterial:</strong> {{ historia.presion }}</p>
+       <p><strong>Lesión:</strong> {{ historia.lesion }}</p>
+       <p><strong>Antecedentes personales:</strong> {{ historia.ap}}</p>
+       <p><strong>Antecedentes familiares:</strong> {{ historia.af}}</p>
+       <p><strong>Diagnostico médico:</strong> {{ historia.dm}}</p>
+       <p><strong>Estudio de imágen:</strong> {{ historia.ei}}</p>
+       <p><strong>estudio de laboratorio:</strong> {{ historia.el}}</p>
+       <p><strong>QX:</strong> {{ historia.qx}}</p>
+       <p><strong>tratamiento médico:</strong> {{ historia.tm}}</p>
+       <p><strong>Tratamiento fármaco:</strong> {{ historia.tf}}</p>
+       <p><strong>ALERGIAS:</strong> {{ historia.alergias}}</p>
+       <p><strong>Saturación:</strong> {{ historia.saturacion}}</p>
+       <p><strong>Frecuencia cardiaca:</strong> {{ historia.fc}}</p>
+       <p><strong>PESO:</strong> {{ historia.peso}}</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FISIOVIDA</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: 
+                linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+                url("{% static 'images/tratamiento.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        header {
+            background: #154624;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #c7ad02;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 40px 20px;
+            min-height: 80vh;
+        }
+
+        footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        /* ===== FORMULARIO TRATAMIENTO ===== */
+        .form-tratamiento {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+
+        .fila {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .campo input, .campo textarea {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-grid label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-guardar {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-guardar:hover {
+            background-color: #1b5e20;
+        }
+
+        /* ===== ESTILO PREMIUM ===== */
+        .tratamiento-container {
+            max-width: 1100px;
+            margin: 30px auto 60px;
+        }
+
+        .tratamiento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .tratamiento-header h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #1f2937;
+        }
+
+        .tratamiento-header p {
+            margin: 0;
+            font-size: 15px;
+            color: #64748b;
+        }
+
+        .form-premium {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 18px;
+            color: #1e293b;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .premium-grid {
+            flex-wrap: wrap;
+        }
+
+        .campo input,
+        .campo textarea {
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+        }
+
+        .campo input:focus,
+        .campo textarea:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14,165,233,0.25);
+        }
+
+        .premium-checks {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .check-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .check-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .tratamiento-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #15e90e, #02c70f);
+            border-radius: 999px;
+            padding: 14px 34px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(2, 199, 32, 0.45);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Centro de Rehabilitación Física</h1>
+</header>
+
+<nav>
+    <a href="{% url 'mis_pacientes' %}">Pacientes</a>
+</nav>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    © 2026 sistema de fisioterapia
+</footer>
+
+</body>
+</html>

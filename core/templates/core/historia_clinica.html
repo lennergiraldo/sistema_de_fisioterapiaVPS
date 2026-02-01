@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia Clínica</title>
+    <link rel="stylesheet" href="{% static 'css/historia_clinica.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Historia Clínica</h2>
+
+    <div class="paciente-info">
+        Paciente: {{ paciente.nombres }} {{ paciente.apellidos }}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Fila 1 -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Tipo de terapia</label>
+                {{ form.tipo_terapia }}
+            </div>
+
+            <div class="form-group">
+                <label>Sexo</label>
+                {{ form.sexo }}
+            </div>
+             <div class="form-group">
+                <label>Diabetes</label>
+                {{ form.diabetes }}
+            </div>
+            <div class="form-group">
+                <label>Tipo de servicio</label>
+                {{ form.tipo_servicio }}
+            </div>
+            <div class="form-group">
+                <label>PACIENTE EN CAMA</label>
+                {{ form.paciente_cama }}
+            </div>
+             <div class="form-group">
+                <label>PACIENTE EN SILLA</label>
+                {{ form.paciente_silla }}
+            </div>
+            <div class="form-group">
+                <label>BIPEDESTACIÓN</label>
+                {{ form.bipedestacion}}
+            </div>
+            <div class="form-group">
+                <label>CONTROL DE ESFINTERES</label>
+                {{ form.control}}
+            </div>
+              <div class="form-group">
+                <label>TROFISMO</label>
+                {{ form.trofismo}}
+            </div>
+             <div class="form-group">
+                <label>MARCHA</label>
+                {{ form.marcha}}
+            </div>
+             <div class="form-group">
+                <label>SENSIBILIDAD</label>
+                {{ form.sensibilidad}}
+            </div>
+            <div class="form-group">
+                <label>TONO MUSCULAR </label>
+                {{ form.tono_muscular}}
+            </div>
+            <div class="form-group">
+                <label>A.M.A </label>
+                {{ form.ama}}
+            </div>
+            <div class="form-group">
+                <label>FUERZA MUSCULAR </label>
+                {{ form.fuerza_muscular}}
+            </div>
+            <div class="form-group">
+                <label>REFLEJO </label>
+                {{ form.reflejo}}
+            </div>
+            <div class="form-group">
+                <label> ESPASTICIDAD/FLACIDEZ </label>
+                {{ form.ef}}
+            </div>
+            <div class="form-group">
+                <label> PLEJIA </label>
+                {{ form.plejia}}
+            </div>
+            <div class="form-group">
+                <label> PARESIA</label>
+                {{ form.paresia}}
+            </div>
+        </div>
+
+        <!-- Fila 2 -->
+
+              <!-- Síntomas -->
+    <div class="form-group">
+        <label for="{{ form.sintomas.id_for_label }}">Síntomas:</label>
+        {{ form.sintomas }}
+    </div>
+
+    <!-- Signos -->
+    <div class="form-group">
+        <label for="{{ form.signos.id_for_label }}">Signos:</label>
+        {{ form.signos }}
+    </div>
+    <!-- Lesión -->
+    <div class="form-group">
+        <label for="{{ form.lesion.id_for_label }}">Lesión:</label>
+        {{ form.lesion }}
+    </div>
+    <!-- Presión -->
+    <div class="form-group">
+        <label for="{{ form.presion.id_for_label }}">Presión arterial:</label>
+        {{ form.presion }}
+    </div>
+
+    
+
+    <div class="form-group">
+        <label for="{{ form.saturacion.id_for_label }}">Saturacion:</label>
+        {{ form.saturacion}}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.fc.id_for_label }}">Frecuencia cardiaca:</label>
+        {{ form.fc }}
+    </div>
+     <div class="form-group">
+        <label for="{{ form.peso.id_for_label }}">Peso:</label>
+        {{ form.peso }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.ap.id_for_label }}">Antecedentes personales:</label>
+        {{ form.ap }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.af.id_for_label }}">Antecedentes familiares:</label>
+        {{ form.af }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.alergias.id_for_label }}">Alergias:</label>
+        {{ form.alergias }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.qx.id_for_label }}">QX:</label>
+        {{ form.qx}}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.dm.id_for_label }}">Dagnostico médico:</label>
+        {{ form.dm }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.tf.id_for_label }}">Tratamiento fármaco:</label>
+        {{ form.tf }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.tm.id_for_label }}">Tratamiento médico:</label>
+        {{ form.tm }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.ei.id_for_label }}">Estudio de imágen:</label>
+        {{ form.ei }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.el.id_for_label }}">Estudio de laboratorio:</label>
+        {{ form.el}}
+    </div>
+
+
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="btn btn-save">Guardar</button>
+            <a href="{% url 'mis_pacientes' %}" class="btn btn-back">Volver</a>
+         <a href="{% url 'exportar_historia_pdf' historia.id %}" class="btn btn-sm btn-danger">
+    📄 Imprimir PDF
+</a>
+
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

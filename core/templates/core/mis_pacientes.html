@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FISIOTERAPIA | Gestión de Pacientes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="app-header">
+    <h1>FISIOTERAPIA</h1>
+    <p>Sistema de Gestión de Fisioterapia</p>
+</header>
+
+<main class="container">
+
+    <section class="card">
+        <h2>{% if editando %}Editar Paciente{% else %}Registrar Paciente{% endif %}</h2>
+
+        <form method="POST" class="form-grid">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-primary">
+                {% if editando %}Guardar Cambios{% else %}Guardar Paciente{% endif %}
+            </button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Buscar Paciente</h2>
+        <form method="GET" action="{% url 'buscar_paciente' %}" class="form-inline">
+            <input type="text" name="cedula" placeholder="Buscar por cédula">
+            <button type="submit" class="btn-secondary">Buscar</button>
+            <a href="{% url 'mis_pacientes' %}" class="btn-link">Ver todos</a>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Mis Pacientes</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Cédula</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pacientes %}
+                    <tr>
+                        <td>{{ p.nombres }}</td>
+                        <td>{{ p.apellidos }}</td>
+                        <td>{{ p.cedula }}</td>
+                        <td>{{ p.telefono }}</td>
+                        <td class="actions">
+                            <a href="{% url 'editar_paciente' p.id %}" class="btn-icon edit">Editar</a>
+                            <a href="{% url 'eliminar_paciente' p.id %}" class="btn-icon delete"
+                               onclick="return confirm('¿Seguro que deseas eliminar este paciente?');">
+                               Eliminar
+                            </a>
+                            <a href="{% url 'historia_clinica' p.id %}" class="btn-icon info">Historia Clínica</a>
+                            {% if p.id %}
+                                <a href="{% url 'tratamiento' p.id %}" class="btn-icon treat">Tratamiento</a>
+                            {% else %}
+                                <span class="btn-icon disabled">Tratamiento</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-msg">
+                            {% if busqueda %}
+                                No está registrado
+                            {% else %}
+                                No hay pacientes
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<footer class="app-footer">
+    © 2026 SOFTWARE DE FISIOTERAPIA — Desarrollado por: Giraldo y Asociados.
+</footer>
+
+</body>
+</html>
