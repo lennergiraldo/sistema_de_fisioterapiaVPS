@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fisio',           # el nombre que creaste en MySQL
-        'USER': 'root',                    # usuario administrador
-        'PASSWORD': 'jeremias23', # tu contraseña root
+        'NAME': 'fisio',
+        'USER': 'fisiouser',
+        'PASSWORD': 'jeremias23',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -87,7 +87,6 @@ DATABASES = {
         },
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
