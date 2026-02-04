@@ -78,13 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fisio',
-        'USER': 'fisiouser',
-        'PASSWORD': 'jeremias23',
+        'USER': 'django_user',
+        'PASSWORD': 'Django2026Seguro!',
         'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
     }
 }
 # Password validation
