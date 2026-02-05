@@ -126,7 +126,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
-    BASE_DIR /'static',
+    BASE_DIR / "core" / "static",  # tu carpeta core/static/css
+    # Si hubiera otra carpeta de estáticos puedes añadirla aquí
 ]
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
