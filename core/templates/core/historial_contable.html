@@ -1,0 +1,99 @@
+
+{% load static %}
+
+
+<style>
+
+body {
+
+    background-image: url("{% static 'images/contabilidad.jpg' %}");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+}
+
+</style>
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>contabilidad del paciente</title>
+    <link rel="stylesheet" href="{% static 'css/historial_contable.css' %}">
+</head>
+<body>
+    
+<div class="card">
+
+    <h2>Contabilidad - {{ paciente.nombre }} {{ paciente.apellidos }}</h2>
+
+    <div class="resumen">
+        <h3>Saldo actual:
+            {% if saldo > 0 %}
+                <span class="saldo-rojo">$ {{ saldo }}</span>
+            {% elif saldo < 0 %}
+                <span class="saldo-verde">Anticipo $ {{ saldo|floatformat:2 }}</span>
+            {% else %}
+                <span class="saldo-cero">Al día</span>
+            {% endif %}
+        </h3>
+    </div>
+
+    <form method="POST" class="form-contable">
+        {% csrf_token %}
+
+        <input type="date" name="fecha" value="{{ hoy }}" required>
+
+        <input type="text" name="descripcion" placeholder="Descripción (Ej: Terapia 5 sesiones)" required>
+
+        <select name="tipo" required>
+            <option value="">Tipo</option>
+            <option value="deuda">Deuda (Terapia)</option>
+            <option value="pago">Pago</option>
+            <option value="anticipo">Pago Anticipado</option>
+        </select>
+
+        <input type="number" step="0.01" name="monto" placeholder="Monto $" required>
+
+        <button type="submit" class="btn-guardar">Guardar Movimiento</button>
+
+    </form>
+
+    <table class="tabla-contable">
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Monto</th>
+        </tr>
+
+        {% for m in movimientos %}
+        <tr>
+            <td>{{ m.fecha }}</td>
+            <td>{{ m.descripcion }}</td>
+            <td>
+                {% if m.tipo == 'deuda' %}
+                    <span class="badge rojo">Deuda</span>
+                {% elif m.tipo == 'pago' %}
+                    <span class="badge verde">Pago</span>
+                {% else %}
+                    <span class="badge azul">Anticipo</span>
+                {% endif %}
+            </td>
+            <td>$ {{ m.monto }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay movimientos registrados</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>

@@ -5,6 +5,7 @@ from .models import Paciente
 from .forms import PacienteForm
 from django.shortcuts import get_object_or_404, redirect
 from .models import HistoriaClinica
+from .models import Contabilidad
 from .forms import HistoriaClinicaForm
 from django.http import HttpResponse
 # ReportLab para generar PDFs
@@ -481,3 +482,42 @@ def tratamiento_pdf(request, tratamiento_id):
     p.showPage()
     p.save()
     return response
+
+
+
+from django.db.models import Sum
+from django.utils import timezone
+
+def historial_contable(request, paciente_id):
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+
+    if request.method == "POST":
+        fecha = request.POST.get('fecha')
+        descripcion = request.POST.get('descripcion')
+        tipo = request.POST.get('tipo')
+        monto = request.POST.get('monto')
+
+        Contabilidad.objects.create(
+            paciente=paciente,
+            fecha=fecha,
+            descripcion=descripcion,
+            tipo=tipo,
+            monto=monto
+        )
+
+        return redirect('historial_contable', paciente_id=paciente.id)
+
+    movimientos = Contabilidad.objects.filter(paciente=paciente).order_by('-fecha')
+
+    total_deuda = movimientos.filter(tipo='deuda').aggregate(Sum('monto'))['monto__sum'] or 0
+    total_pago = movimientos.filter(tipo='pago').aggregate(Sum('monto'))['monto__sum'] or 0
+    total_anticipo = movimientos.filter(tipo='anticipo').aggregate(Sum('monto'))['monto__sum'] or 0
+
+    saldo = total_deuda - (total_pago + total_anticipo)
+
+    return render(request, 'core/historial_contable.html', {
+        'paciente': paciente,
+        'movimientos': movimientos,
+        'saldo': saldo,
+        'hoy': timezone.now().date()
+    })

@@ -65,6 +65,7 @@
                             </a>
                             <a href="{% url 'historia_clinica' p.id %}" class="btn-icon info">Historia Clínica</a>
                             {% if p.id %}
+                            <a href="{% url 'historial_contable' p.id %}" class="btn-icon info">contabilidad</a>
                                 <a href="{% url 'tratamiento' p.id %}" class="btn-icon treat">Tratamiento</a>
                             {% else %}
                                 <span class="btn-icon disabled">Tratamiento</span>

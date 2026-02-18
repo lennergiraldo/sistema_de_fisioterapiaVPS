@@ -209,3 +209,27 @@ class Tratamiento(models.Model):
 
     def _str_(self):
         return f"Historia clínica de {self.paciente.nombres} {self.paciente.apellidos} {self.paciente.cedula}"
+    
+
+
+from django.db import models
+from django.utils import timezone
+
+class Contabilidad(models.Model):
+
+    TIPO_CHOICES = (
+        ('deuda', 'Deuda (Terapia)'),
+        ('pago', 'Pago'),
+        ('anticipo', 'Pago Anticipado'),
+    )
+
+    paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE, related_name='movimientos')
+    fecha = models.DateField(default=timezone.now)
+    descripcion = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=15, choices=TIPO_CHOICES)
+    monto = models.DecimalField(max_digits=10, decimal_places=2)
+
+    creado = models.DateTimeField(default=timezone.now)
+
+    def _str_(self):
+        return f"{self.paciente} - {self.tipo} - {self.monto}"
