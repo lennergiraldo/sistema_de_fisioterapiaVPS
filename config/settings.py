@@ -78,29 +78,35 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
 
-if ENVIRONMENT == "production":
+
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+
+if DEBUG:
+    # BASE DE DATOS LOCAL (Para pruebas seguras)
     DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    # BASE DE DATOS DEL VPS (Producción)
+
+ DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": "fisio",
-            "USER": "django_user",
-            "PASSWORD": "Django2026Seguro!",
-            "HOST": "localhost",
+            "NAME": "fisio_db",
+            "USER": "admin_fisio",
+            "PASSWORD": "jeremias23",
+            "HOST": "127.0.0.1",
             "PORT": "3306",
             "OPTIONS": {
                 "init_command": "SET sql_mode='STRICT_TRANS_TABLES'"
             }
         }
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
