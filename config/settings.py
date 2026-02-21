@@ -88,18 +88,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-if DEBUG:
-    # BASE DE DATOS LOCAL (Para pruebas seguras)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # BASE DE DATOS DEL VPS (Producción)
+import os
+import platform
 
- DATABASES = {
+# Detectamos el sistema operativo para elegir la base de datos automática
+if platform.system() == 'Linux':
+    # --- CONFIGURACIÓN PARA EL VPS (Producción) ---
+    DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "fisio_db",
@@ -112,7 +107,21 @@ else:
             }
         }
     }
-
+else:
+    # --- CONFIGURACIÓN PARA TU PC (Local) ---
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "fisiolocal",            # La que creamos en tu CMD
+            "USER": "admin_fisio",      # El usuario que creamos en tu CMD
+            "PASSWORD": "fisio123",     # La clave que creamos en tu CMD
+            "HOST": "127.0.0.1",
+            "PORT": "3306",
+            "OPTIONS": {
+                "init_command": "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
