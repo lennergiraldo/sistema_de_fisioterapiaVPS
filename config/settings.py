@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-=irqx!@7#buf%o07yq54dahtop4*edqua&zvs)fwc5bg(3p-2d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['104.145.210.2', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'sistemadefisioterapia.net', 
+    'mail.sistemadefisioterapia.net', 
+    'www.sistemadefisioterapia.net',
+    '104.145.210.2', # Pon la IP de tu VPS también
+]
 
 
 # Application definition
