@@ -30,7 +30,8 @@ ALLOWED_HOSTS = [
     'sistemadefisioterapia.net', 
     'mail.sistemadefisioterapia.net', 
     'www.sistemadefisioterapia.net',
-    '104.145.210.2', # Pon la IP de tu VPS también
+    '104.145.210.2', 
+    'localhost', '127.0.0.1'# Pon la IP de tu VPS también
 ]
 
 
